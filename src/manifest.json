@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+  "name": "Abbr Word to Original Word",
+  "description": "Write your Abbreviation in List!, This Extension will be change your Abbreviation to Original Word!",
+  "version": "1.0.0",
+  "icons": {
+    "48": "icons/icon_48.png",
+    "128": "icons/icon_128.png"
+  },
+  "browser_action": {
+    "default_title": "abbrtooriginal",
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+        "input",
+        "activeTab",
+        "storage"
+  ]
+}
