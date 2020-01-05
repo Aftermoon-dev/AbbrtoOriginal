@@ -5,13 +5,11 @@
         <el-checkbox v-model="enabled">줄임말 변환기 활성화</el-checkbox>
       </el-row>
       <el-row>
-        <el-button @click="navigate('File')" type="primary">가져오기 / 내보내기</el-button>
-      </el-row>
-      <el-row>
         <el-button @click="questionDelete()" type="danger">모든 데이터 초기화</el-button>
       </el-row>
       <el-row>
-        <el-button size="mini" @click="gotoLink('https://github.com/Aftermoon-dev/AbbrtoOriginal')" type="primary">GitHub</el-button>
+        <el-button size="mini" @click="gotoLink('https://github.com/Aftermoon-dev/AbbrtoOriginal')" type="primary">GitHub 저장소</el-button>
+        <el-button size="mini" @click="gotoLink('https://github.com/Aftermoon-dev/')" type="primary">개발자 GitHub</el-button>
       </el-row>
     </el-col>
   </el-container>  
@@ -26,7 +24,7 @@ export default {
   },
   methods: {
     questionDelete() {
-      this.$confirm('등록된 모든 데이터가 삭제됩니다. 진행하시겠습니까?', 'Warning', {
+      this.$confirm('등록된 모든 데이터가 삭제됩니다. 진행하시겠습니까?', '경고', {
         confirmButtonText: '예',
         cancelButtonText: '아니오',
         type: 'warning'
@@ -44,9 +42,6 @@ export default {
     },
     gotoLink(addr) {
       chrome.tabs.create({url: addr, active: true});
-    },
-    navigate(page) {
-      this.$router.push(page);
     }
   }
 }

@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     removeItem(item) {
-      this.$confirm('정말로 삭제하시겠습니까?', 'Warning', {
+      this.$confirm('정말로 삭제하시겠습니까?', '경고', {
         confirmButtonText: '예',
         cancelButtonText: '아니오',
         type: 'warning'
