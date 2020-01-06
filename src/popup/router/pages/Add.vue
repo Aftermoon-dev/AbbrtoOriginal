@@ -14,7 +14,7 @@
             </el-row>
 
             <el-row>
-                <el-button @click="Save('Hi')" type="success">저장</el-button>
+                <el-button @click="Save()" type="success">저장</el-button>
                 <el-button @click="clearText()" type="primary">초기화</el-button>
                 <el-button @click="Back()" type="warning">돌아가기</el-button>
             </el-row>
@@ -33,12 +33,66 @@ export default {
   },
   methods: {
       Save() {
-        this.$message({
-            showClose: true,
-            message: '저장되었습니다!',
-            type: 'success'
-        });
-        this.clearText();
+        console.log(this.abbrWord + " / " + this.originWord);
+        if(this.abbrWord != "" && this.originWord != "") {
+            if(this.abbrWord != this.originWord) {
+                this.$message({
+                    showClose: true,
+                    message: '저장되었습니다!',
+                    type: 'success'
+                });
+
+                var jsonWord = this.$localStorage.get('WordList', []);
+                var objectWord = JSON.parse(jsonWord);
+
+                var alreadyCheck = false;   
+                var loopCheck = false;
+                for(var i in objectWord) {
+                    if(objectWord[i] != null) {
+                        if(objectWord[i]['abbr'] == this.abbrWord) {
+                            alreadyCheck = true;
+                            break;
+                        }
+                        else if(objectWord[i]['origin'] == this.abbrWord) {
+                            loopCheck = true;
+                            break;
+                        }
+                    }
+                }
+
+                if(!alreadyCheck && !loopCheck) {
+                    this.$message({
+                        showClose: true,
+                        message: '등록되었습니다.',
+                        type: 'success'
+                    });
+                    objectWord.push({'abbr': this.abbrWord, 'origin': this.originWord});
+                    this.$localStorage.set('WordList', JSON.stringify(objectWord));
+                    this.clearText();
+                }
+                else {
+                    this.$message({
+                        showClose: true,
+                        message: '이미 등록된 단어입니다.',
+                        type: 'warning'
+                    });
+                }
+            }
+            else {
+                this.$message({
+                    showClose: true,
+                    message: '같은 단어로는 바꿀 수 없습니다.',
+                    type: 'warning'
+                });
+            }
+        }
+        else {
+            this.$message({
+                showClose: true,
+                message: '모든 칸을 다 채워주세요.',
+                type: 'info'
+            });
+        } 
       },
       Back() {
         this.$router.push('List');

@@ -35,13 +35,11 @@ export default {
         this.$message({
           showClose: true,
           type: 'success',
-          message: '모두 삭제되었습니다.'
+          message: '모든 데이터가 삭제되었습니다!'
         });
-        this.Reset();
+        console.log("All Data Reset!");
+        this.$localStorage.clear();
       })
-    },
-    Reset() {
-      console.log("All Reset");
     },
     gotoLink(addr) {
       chrome.tabs.create({url: addr, active: true});

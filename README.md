@@ -30,6 +30,6 @@ SOFTWARE.
 
 - [Vue.js](https://github.com/vuejs/vue)
 - [vue-web-extension](https://github.com/Kocal/vue-web-extension)
-- [vue-route](https://github.com/vuejs/vue-router)
+- [vue-router](https://github.com/vuejs/vue-router)
 - [vue-web-storage](https://github.com/ankurk91/vue-web-storage)
 - [Element UI](https://github.com/ElemeFE/element)
