@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     questionDelete() {
-      this.$confirm('등록된 모든 데이터가 삭제됩니다. 진행하시겠습니까?', '경고', {
+      this.$confirm('등록된 모든 데이터가 삭제되고 초기 상태로 돌아갑니다. 진행하시겠습니까?', '경고', {
         confirmButtonText: '예',
         cancelButtonText: '아니오',
         type: 'warning'
@@ -35,7 +35,7 @@ export default {
         this.$message({
           showClose: true,
           type: 'success',
-          message: '모든 데이터가 삭제되었습니다!'
+          message: '초기화가 완료되었습니다!'
         });
         console.log("All Data Reset!");
         this.$localStorage.clear();
