@@ -12,6 +12,7 @@ const config = {
   entry: {
     'background': './background.js',
     'popup/popup': './popup/popup.js',
+    'content_scripts': './scripts/abbrtooriginal.js'
   },
   output: {
     path: __dirname + '/dist',
@@ -87,6 +88,7 @@ const config = {
           return JSON.stringify(jsonContent, null, 2);
         },
       },
+      { from: 'scripts', to: 'scripts'},
     ]),
   ],
 };

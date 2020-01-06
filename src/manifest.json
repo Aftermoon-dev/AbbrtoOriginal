@@ -16,6 +16,13 @@
       "background.js"
     ]
   },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["scripts/abbrtooriginal.js"],
+      "all_frames": true
+    } 
+  ],
   "permissions": [
       "storage",
       "activeTab",
