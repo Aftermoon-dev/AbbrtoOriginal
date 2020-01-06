@@ -15,8 +15,8 @@
 
             <el-row>
                 <el-button @click="Save()" type="success">저장</el-button>
-                <el-button @click="clearText()" type="primary">초기화</el-button>
-                <el-button @click="Back()" type="warning">돌아가기</el-button>
+                <el-button @click="clearText()" type="warning">초기화</el-button>
+                <el-button @click="Back()" type="primary">돌아가기</el-button>
             </el-row>
         </el-col>
     </el-container>  
@@ -36,12 +36,6 @@ export default {
         console.log(this.abbrWord + " / " + this.originWord);
         if(this.abbrWord != "" && this.originWord != "") {
             if(this.abbrWord != this.originWord) {
-                this.$message({
-                    showClose: true,
-                    message: '저장되었습니다!',
-                    type: 'success'
-                });
-
                 var jsonWord = this.$localStorage.get('WordList', []);
                 var objectWord = JSON.parse(jsonWord);
 
@@ -63,7 +57,7 @@ export default {
                 if(!alreadyCheck && !loopCheck) {
                     this.$message({
                         showClose: true,
-                        message: '등록되었습니다.',
+                        message: '등록되었습니다!',
                         type: 'success'
                     });
                     objectWord.push({'abbr': this.abbrWord, 'origin': this.originWord});
