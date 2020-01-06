@@ -15,7 +15,8 @@
   "dependencies": {
     "element-ui": "^2.4.5",
     "vue": "^2.6.10",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vue-web-storage": "^4.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",

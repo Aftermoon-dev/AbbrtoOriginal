@@ -2,7 +2,7 @@
   <el-container>
     <el-col style="padding: 10px;">
       <el-row>
-        <el-checkbox v-model="enabled">줄임말 변환기 활성화</el-checkbox>
+        <el-checkbox v-model="enabled" @change="saveEnableData()">줄임말 변환기 활성화</el-checkbox>
       </el-row>
       <el-row>
         <el-button @click="questionDelete()" type="danger">모든 데이터 초기화</el-button>
@@ -21,6 +21,9 @@ export default {
     return {
       enabled: true
     };
+  },
+  created() {
+    this.enabled = this.$localStorage.get('Enable', true);
   },
   methods: {
     questionDelete() {
@@ -42,6 +45,9 @@ export default {
     },
     gotoLink(addr) {
       chrome.tabs.create({url: addr, active: true});
+    },
+    saveEnableData() {
+      this.$localStorage.set('Enable', this.enabled);
     }
   }
 }
