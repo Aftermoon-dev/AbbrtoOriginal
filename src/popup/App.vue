@@ -6,8 +6,8 @@
           <el-submenu index="1">
             <template slot="title"><i class="el-icon-menu"></i>{{ menu }}</template>
             <el-menu-item-group>
-              <el-menu-item index="List" @click="navigate('List')"><i class="el-icon-s-order"></i>{{ list }}</el-menu-item>
-              <el-menu-item index="Setting" @click="navigate('Setting')"><i class="el-icon-set-up"></i>{{ setting }}</el-menu-item>
+              <el-menu-item index="List"><i class="el-icon-s-order"></i>{{ list }}</el-menu-item>
+              <el-menu-item index="Setting"><i class="el-icon-set-up"></i>{{ setting }}</el-menu-item>
               <br />
             </el-menu-item-group>
           </el-submenu>

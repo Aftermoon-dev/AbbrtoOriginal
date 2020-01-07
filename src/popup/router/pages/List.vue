@@ -10,7 +10,7 @@
             <el-button
               size="mini"
               type="danger"
-              @click="removeItem(tableData[scope.$index]['abbr'])">삭제
+              @click="delWarning(scope.$index)">삭제
             </el-button>
           </template>
         </el-table-column>
@@ -19,6 +19,17 @@
 </template>
 
 <script>
+function getLocalWordList() {
+  return new Promise(function (resolve, reject) {
+        chrome.storage.local.get('WordList', function(items){
+        if (!chrome.runtime.error) {
+          resolve(items);
+        }
+        reject(new Error(chrome.runtime.error));
+     });
+  });
+}
+
 export default {
   data () {
     return {
@@ -26,62 +37,66 @@ export default {
     }
   },
   created() {
+    var _this = this;
     // Check First Initial
-    var isFirst = this.$localStorage.get('firstInit', true);
-    if(isFirst) {
-      this.$localStorage.set('WordList', '[{"abbr": "ㅎㅇ", "origin": "안녕하세요"}, {"abbr": "ㅅㄱ", "origin": "수고하셨습니다"}]');
-      this.$localStorage.set('Enable', true);
-      this.$localStorage.set('firstInit', false);
-    }
-    // Load List
-    this.getList();
+    chrome.storage.local.get(['firstInit'], function (items) {
+      if(items.firstInit == undefined) {
+        console.log("Setting First Data...");
+        var firstList = JSON.stringify([{"abbr": "ㅎㅇ", "origin": "안녕하세요"}, {"abbr": "ㅅㄱ", "origin": "수고하셨습니다"}]);
+        chrome.storage.local.set({'enable': true}, function() {});
+        chrome.storage.local.set({'firstInit': false}, function() {});
+        chrome.storage.local.set({'WordList': firstList}, function() {});
+      }
+      _this.writeList();
+    });
   },
-  methods: {
-    removeItem(abbr) {
-      this.$confirm('정말로 삭제하시겠습니까?', '경고', {
+  methods: {  
+    delWarning(idx) {
+      console.log(idx);
+      this.$confirm('정말 "' + this.tableData[idx]['abbr'] + '/' + this.tableData[idx]['origin'] + '"을(를) 삭제하시겠습니까?', '경고', {
         confirmButtonText: '예',
         cancelButtonText: '아니오',
         type: 'warning'
       }).then(() => {
-        this.remove(abbr);
+        this.deleteItem(this.tableData[idx]['abbr']);
       }).catch(() => {});
     },
-    remove(item) {
-      console.log("Remove " + item);
-      this.$message({
+    deleteItem(targetAbbr) {
+      var _this = this;
+      getLocalWordList().then(function (data) {
+        _this.$message({
           showClose: true,
-          type: 'success',
-          message: '삭제되었습니다.'
+          message: '삭제되었습니다!',
+          type: 'success'
+        });
+        var wordArray = Object.values(JSON.parse(data.WordList));
+        console.log('original : ' + JSON.stringify(wordArray));
+        wordArray = wordArray.filter(wordArray => wordArray.abbr !== targetAbbr)
+        chrome.storage.local.set({'WordList': JSON.stringify(wordArray)}, function() {});
+        console.log('change : ' + JSON.stringify(wordArray));
+        _this.resetTable();
+      }).catch(function (err) {
+        console.error(err);
       });
-
-      var jsonWord = this.$localStorage.get('WordList', []);
-      var objectWord = JSON.parse(jsonWord);
-
-      for(var i in objectWord) {
-        if(objectWord[i] != null && objectWord[i] != undefined) {
-          if(objectWord[i]['abbr'] == item) {
-            objectWord[i] = null;
+    },
+    writeList() {
+      var _this = this;
+      getLocalWordList().then(function (data) {
+        if(data.WordList != undefined) {
+          var objectWord = JSON.parse(data.WordList);
+          for(var i in objectWord) {
+            if(objectWord[i] != null && objectWord[i] != undefined) {
+              _this.tableData.push(objectWord[i]);
+            }
           }
         }
-      }
-      this.$localStorage.set('WordList', JSON.stringify(objectWord));
-      this.resetTable();
-    },
-    getList() {
-      var jsonWord = this.$localStorage.get('WordList', []);
-      var objectWord = JSON.parse(jsonWord);
-      console.log(objectWord);
-
-      for(var i in objectWord) {
-        if(objectWord[i] != null && objectWord[i] != undefined) {
-          console.log("Add Item " + i + " : " + objectWord[i]['abbr'] + "/" + objectWord[i]['origin']);
-          this.tableData.push(objectWord[i]);
-        }
-      }
+      }).catch(function (err) {
+        console.error(err);
+      });
     },
     resetTable() {
       this.tableData = [];
-      this.getList();
+      this.writeList();
     }
   }
 }
