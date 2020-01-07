@@ -16,14 +16,18 @@
 </template>
 
 <script>
+var data = {
+  enabled: true
+}
 export default {
   data () {
-    return {
-      enabled: true
-    };
+    return data
   },
   created() {
-    this.enabled = this.$localStorage.get('Enable', true);
+    chrome.storage.local.get('enable', function (items) {
+      data.enabled = items.enable;
+      console.log('Load ' + items.enable);
+    });
   },
   methods: {
     questionDelete() {
@@ -32,20 +36,35 @@ export default {
         cancelButtonText: '아니오',
         type: 'warning'
       }).then(() => {
-        this.$message({
-          showClose: true,
-          type: 'success',
-          message: '초기화가 완료되었습니다!'
+        var _this = this;
+        chrome.storage.local.clear(function() {
+          var err = chrome.runtime.lastError;
+          if (err) {
+            _this.$message({
+              showClose: true,
+              type: 'danger',
+              message: '초기화에 실패하였습니다. 지속적으로 발생할 경우 개발자에게 문의해주세요.'
+            });
+            console.error(err);
+          }
+          else {
+            console.log("All Data Reset!");
+            _this.$message({
+              showClose: true,
+              type: 'success',
+              message: '초기화가 완료되었습니다!'
+            });
+            _this.$router.push('List');
+          }
         });
-        console.log("All Data Reset!");
-        this.$localStorage.clear();
-      })
+      }).catch(() => {});
     },
     gotoLink(addr) {
       chrome.tabs.create({url: addr, active: true});
     },
     saveEnableData() {
-      this.$localStorage.set('Enable', this.enabled);
+      chrome.storage.local.set({'enable': data.enabled}, function() {});
+      console.log('Save ' + data.enabled);
     }
   }
 }
