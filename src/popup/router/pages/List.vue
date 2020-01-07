@@ -25,7 +25,7 @@ export default {
       tableData: []
     }
   },
-  created() {}
+  created() {
     // Check First Initial
     var isFirst = this.$localStorage.get('firstInit', true);
     if(isFirst) {
