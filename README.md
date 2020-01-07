@@ -2,6 +2,10 @@
 
 줄임말 변환기 - Chrome Extension using Vue.js
 
+![List](https://user-images.githubusercontent.com/3215313/71915243-a9c48f80-31be-11ea-8342-c39f9f8189dc.png)
+![Add Word](https://user-images.githubusercontent.com/3215313/71915244-aaf5bc80-31be-11ea-9502-105313a58075.png)
+![Setting](https://user-images.githubusercontent.com/3215313/71915245-ab8e5300-31be-11ea-8322-008aebdf9e18.png)
+
 ## How to Use
 
 1. 설치 후 크롬 오른쪽 상단 확장 프로그램에서 줄임말 변환기를 연다
