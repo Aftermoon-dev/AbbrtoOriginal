@@ -25,8 +25,7 @@ export default {
       tableData: []
     }
   },
-  created() {
-
+  created() {}
     // Check First Initial
     var isFirst = this.$localStorage.get('firstInit', true);
     if(isFirst) {
@@ -34,8 +33,6 @@ export default {
       this.$localStorage.set('Enable', true);
       this.$localStorage.set('firstInit', false);
     }
-
-
     // Load List
     this.getList();
   },
