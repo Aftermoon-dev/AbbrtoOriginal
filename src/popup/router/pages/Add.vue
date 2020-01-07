@@ -69,15 +69,17 @@ export default {
 
         loadData().then(function (data) {
             var wordArray = Object.values(JSON.parse(data.WordList));
-            var alreadyCheck = false;
+            var isAlreadyRegistered = false;
+
             for(var i in wordArray) {
                 console.log(wordArray[i]);
-                if(wordArray[i]['abbr'] == _this.abbrWord || wordArray[i]['origin'] == _this.abbrWord) {
-                    alreadyCheck = true;
+                if(wordArray[i]['abbr'] == _this.abbrWord || wordArray[i]['origin'] == _this.abbrWord || 
+                    wordArray[i]['abbr'] == _this.originWord || wordArray[i]['origin'] == _this.originWord) {
+                    isAlreadyRegistered = true;
                     break;
                 }
             }
-            if(!alreadyCheck) {
+            if(!isAlreadyRegistered) {
                 _this.$message({
                     showClose: true,
                     message: '등록되었습니다!',
@@ -95,7 +97,7 @@ export default {
                 });
             }
         }).catch(function (err) {
-            this.$message({
+            _this.$message({
                 showClose: true,
                 message: '등록에 실패했습니다. 이 메시지가 지속된다면 개발자에게 문의해주세요.',
                 type: 'danger'
