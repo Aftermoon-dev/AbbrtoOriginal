@@ -1,10 +1,11 @@
 # AbbrtoOriginal
+
 줄임말 변환기 - Chrome Extension using Vue.js
 
 ## License
-```
-MIT License
 
+``` 
+MIT License
 Copyright (C) 2020 Minjae Seon
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -33,3 +34,4 @@ SOFTWARE.
 - [vue-router](https://github.com/vuejs/vue-router)
 - [vue-web-storage](https://github.com/ankurk91/vue-web-storage)
 - [Element UI](https://github.com/ElemeFE/element)
+- [jQuery](https://github.com/jquery/jquery)
