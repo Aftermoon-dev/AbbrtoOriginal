@@ -82,7 +82,7 @@ export default {
             if(!isAlreadyRegistered) {
                 _this.$message({
                     showClose: true,
-                    message: '등록되었습니다!',
+                    message: '등록되었습니다! 새로고침을 하셔야 정상적으로 적용됩니다.',
                     type: 'success'
                 });
                 wordArray.push({'abbr': _this.abbrWord, 'origin': _this.originWord});
