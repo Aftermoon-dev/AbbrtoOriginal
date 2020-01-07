@@ -14,8 +14,8 @@
             </el-row>
 
             <el-row>
-                <el-button @click="Save()" type="success">저장</el-button>
-                <el-button @click="clearText()" type="warning">초기화</el-button>
+                <el-button @click="checkError()" type="success">저장</el-button>
+                <el-button @click="clearText()" type="warning">지우기</el-button>
                 <el-button @click="Back()" type="primary">돌아가기</el-button>
             </el-row>
         </el-col>
@@ -32,45 +32,11 @@ export default {
     };
   },
   methods: {
-      Save() {
+    checkError() {
         console.log(this.abbrWord + " / " + this.originWord);
         if(this.abbrWord != "" && this.originWord != "") {
             if(this.abbrWord != this.originWord) {
-                var jsonWord = this.$localStorage.get('WordList', []);
-                var objectWord = JSON.parse(jsonWord);
-
-                var alreadyCheck = false;   
-                var loopCheck = false;
-                for(var i in objectWord) {
-                    if(objectWord[i] != null) {
-                        if(objectWord[i]['abbr'] == this.abbrWord) {
-                            alreadyCheck = true;
-                            break;
-                        }
-                        else if(objectWord[i]['origin'] == this.abbrWord) {
-                            loopCheck = true;
-                            break;
-                        }
-                    }
-                }
-
-                if(!alreadyCheck && !loopCheck) {
-                    this.$message({
-                        showClose: true,
-                        message: '등록되었습니다!',
-                        type: 'success'
-                    });
-                    objectWord.push({'abbr': this.abbrWord, 'origin': this.originWord});
-                    this.$localStorage.set('WordList', JSON.stringify(objectWord));
-                    this.clearText();
-                }
-                else {
-                    this.$message({
-                        showClose: true,
-                        message: '이미 등록된 단어입니다.',
-                        type: 'warning'
-                    });
-                }
+                this.Save();
             }
             else {
                 this.$message({
@@ -87,14 +53,63 @@ export default {
                 type: 'info'
             });
         } 
-      },
-      Back() {
+    },
+    Save() {
+        var _this = this;
+        function loadData() {
+            return new Promise(function (resolve, reject) {
+                chrome.storage.local.get('WordList', function(items){
+                    if (!chrome.runtime.error) {
+                        resolve(items);
+                    }
+                    reject(new Error(chrome.runtime.error));
+                });
+            });
+        }
+
+        loadData().then(function (data) {
+            var wordArray = Object.values(JSON.parse(data.WordList));
+            var alreadyCheck = false;
+            for(var i in wordArray) {
+                console.log(wordArray[i]);
+                if(wordArray[i]['abbr'] == _this.abbrWord || wordArray[i]['origin'] == _this.abbrWord) {
+                    alreadyCheck = true;
+                    break;
+                }
+            }
+            if(!alreadyCheck) {
+                _this.$message({
+                    showClose: true,
+                    message: '등록되었습니다!',
+                    type: 'success'
+                });
+                wordArray.push({'abbr': _this.abbrWord, 'origin': _this.originWord});
+                chrome.storage.local.set({'WordList': JSON.stringify(wordArray)}, function() {});
+                _this.clearText();
+            }
+            else {
+                _this.$message({
+                    showClose: true,
+                    message: '이미 등록된 단어입니다.',
+                    type: 'warning'
+                });
+            }
+        }).catch(function (err) {
+            this.$message({
+                showClose: true,
+                message: '등록에 실패했습니다. 이 메시지가 지속된다면 개발자에게 문의해주세요.',
+                type: 'danger'
+            });
+            console.error(err);
+        });
+    },
+    Back() {
         this.$router.push('List');
-      },
-      clearText() {
-          this.abbrWord = "";
-          this.originWord = "";
-      }
+    },
+    clearText() {
+        this.abbrWord = "";
+        this.originWord = "";
+    }
   }
 }
 </script>
