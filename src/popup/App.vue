@@ -35,7 +35,6 @@ export default {
       menu: "메뉴",
       list: "목록",
       setting: '설정',
-      isList: true
     }
   },
   methods: {
