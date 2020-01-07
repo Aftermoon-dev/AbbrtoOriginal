@@ -2,6 +2,15 @@
 
 줄임말 변환기 - Chrome Extension using Vue.js
 
+## How to Build
+
+```
+git clone https://github.com/Aftermoon-dev/AbbrtoOriginal.git
+cd AbbrtoOriginal
+npm run build
+```
+Extension will be build to './dist' Folder.
+
 ## License
 
 ``` 
