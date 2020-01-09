@@ -13,6 +13,8 @@
 
 ## Download From Store
 
+Chrome Web Store : https://chrome.google.com/webstore/detail/%EC%A4%84%EC%9E%84%EB%A7%90-%EB%B3%80%ED%99%98%EA%B8%B0/cphnlniilicaiddjekdhpnhhcgjanjmi?hl=ko&gl=KR
+
 Naver Whale Store : https://store.whale.naver.com/detail/bhkpphkbomelmkadobdpdnngcoikjmkj
 
 ## How to Use
