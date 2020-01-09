@@ -43,9 +43,10 @@ export default {
       if(items.firstInit == undefined) {
         console.log("Setting First Data...");
         var firstList = JSON.stringify([{"abbr": "ㅎㅇ", "origin": "안녕하세요"}, {"abbr": "ㅅㄱ", "origin": "수고하셨습니다"}]);
+        chrome.storage.local.set({'WordList': firstList}, function() {});
         chrome.storage.local.set({'enable': true}, function() {});
         chrome.storage.local.set({'firstInit': false}, function() {});
-        chrome.storage.local.set({'WordList': firstList}, function() {});
+        chrome.tabs.create({url: "https://github.com/Aftermoon-dev/AbbrtoOriginal/wiki/Help-(%EB%8F%84%EC%9B%80%EB%A7%90)", active: true});
       }
       _this.writeList();
     });
@@ -62,22 +63,10 @@ export default {
       }).catch(() => {});
     },
     deleteItem(targetAbbr) {
-      var _this = this;
-      getLocalWordList().then(function (data) {
-        _this.$message({
-          showClose: true,
-          message: '삭제되었습니다!',
-          type: 'success'
-        });
-        var wordArray = Object.values(JSON.parse(data.WordList));
-        console.log('original : ' + JSON.stringify(wordArray));
-        wordArray = wordArray.filter(wordArray => wordArray.abbr !== targetAbbr)
-        chrome.storage.local.set({'WordList': JSON.stringify(wordArray)}, function() {});
-        console.log('change : ' + JSON.stringify(wordArray));
-        _this.resetTable();
-      }).catch(function (err) {
-        console.error(err);
-      });
+      var wordArray = this.tableData;
+      wordArray = wordArray.filter(wordArray => wordArray.abbr !== targetAbbr)
+      this.tableData = wordArray;
+      chrome.storage.local.set({'WordList': JSON.stringify(wordArray)}, function() {});
     },
     writeList() {
       var _this = this;
@@ -93,10 +82,6 @@ export default {
       }).catch(function (err) {
         console.error(err);
       });
-    },
-    resetTable() {
-      this.tableData = [];
-      this.writeList();
     }
   }
 }

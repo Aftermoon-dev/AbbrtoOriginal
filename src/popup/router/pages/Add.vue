@@ -18,6 +18,7 @@
                 <el-button @click="clearText()" type="warning">지우기</el-button>
                 <el-button @click="Back()" type="primary">돌아가기</el-button>
             </el-row>
+            <h4>중요한 정보를 입력하지 마세요! 단어는 암호화되어서 저장되지 않습니다.<br />개발자는 중요 정보를 입력해서 생기는 문제를 책임지지 않습니다.</h4>
         </el-col>
     </el-container>  
 </template>
@@ -74,7 +75,7 @@ export default {
             for(var i in wordArray) {
                 console.log(wordArray[i]);
                 if(wordArray[i]['abbr'] == _this.abbrWord || wordArray[i]['origin'] == _this.abbrWord || 
-                    wordArray[i]['abbr'] == _this.originWord || wordArray[i]['origin'] == _this.originWord) {
+                    wordArray[i]['abbr'] == _this.originWord) {
                     isAlreadyRegistered = true;
                     break;
                 }
@@ -82,7 +83,7 @@ export default {
             if(!isAlreadyRegistered) {
                 _this.$message({
                     showClose: true,
-                    message: '등록되었습니다! 새로고침을 하셔야 정상적으로 적용됩니다.',
+                    message: '등록되었습니다!',
                     type: 'success'
                 });
                 wordArray.push({'abbr': _this.abbrWord, 'origin': _this.originWord});
