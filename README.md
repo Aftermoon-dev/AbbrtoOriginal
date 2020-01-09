@@ -1,5 +1,8 @@
 # AbbrtoOriginal
 
+![Release](https://img.shields.io/github/v/release/aftermoon-dev/AbbrtoOriginal?include_prereleases)
+![License](https://img.shields.io/github/license/aftermoon-dev/AbbrtoOriginal)
+
 줄임말 변환기 - Chrome Extension using Vue.js
 
 ![List](https://user-images.githubusercontent.com/3215313/71915243-a9c48f80-31be-11ea-8342-c39f9f8189dc.png)
