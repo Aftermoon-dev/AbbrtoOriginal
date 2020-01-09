@@ -19,14 +19,7 @@ Naver Whale Store : https://store.whale.naver.com/detail/bhkpphkbomelmkadobdpdnn
 
 ## How to Use
 
-* 주소창은 적용되지 않으며, 일부 입력 창은 적용되지 않을 수 있습니다.
-
-1. 설치 후 크롬 오른쪽 상단 확장 프로그램에서 줄임말 변환기를 연다
-2. 팝업창 상단에 + 버튼을 누른다
-3. 원하는 단어를 추가한다
-4. 글을 쓸 페이지를 새로고침 한다
-5. 바꿀 단어 입력 후 띄어쓰기를 하면 설정된 단어로 변경된다.
-
+https://github.com/Aftermoon-dev/AbbrtoOriginal/wiki/Help-(%EB%8F%84%EC%9B%80%EB%A7%90)
 
 ## How to Build
 
