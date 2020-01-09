@@ -6,6 +6,10 @@
 ![Add Word](https://user-images.githubusercontent.com/3215313/71915244-aaf5bc80-31be-11ea-9502-105313a58075.png)
 ![Setting](https://user-images.githubusercontent.com/3215313/71915245-ab8e5300-31be-11ea-8322-008aebdf9e18.png)
 
+## Download From Store
+
+Naver Whale Store : https://store.whale.naver.com/detail/bhkpphkbomelmkadobdpdnngcoikjmkj
+
 ## How to Use
 
 * 주소창은 적용되지 않으며, 일부 입력 창은 적용되지 않을 수 있습니다.
