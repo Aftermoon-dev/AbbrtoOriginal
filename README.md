@@ -5,6 +5,8 @@
 
 줄임말 변환기 - Chrome Extension using Vue.js
 
+[![Youtube](https://img.youtube.com/vi/d-UKYFShhHI/0.jpg)](https://www.youtube.com/watch?v=d-UKYFShhHI)
+
 ![List](https://user-images.githubusercontent.com/3215313/71915243-a9c48f80-31be-11ea-8342-c39f9f8189dc.png)
 ![Add Word](https://user-images.githubusercontent.com/3215313/71915244-aaf5bc80-31be-11ea-9502-105313a58075.png)
 ![Setting](https://user-images.githubusercontent.com/3215313/71915245-ab8e5300-31be-11ea-8322-008aebdf9e18.png)
