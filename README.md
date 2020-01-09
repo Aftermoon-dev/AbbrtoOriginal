@@ -3,7 +3,7 @@
 [![Release](https://img.shields.io/github/v/release/aftermoon-dev/AbbrtoOriginal?include_prereleases)](https://github.com/Aftermoon-dev/AbbrtoOriginal/releases)
 [![License](https://img.shields.io/github/license/aftermoon-dev/AbbrtoOriginal)](https://github.com/Aftermoon-dev/AbbrtoOriginal/blob/master/LICENSE)
 
-줄임말 변환기 - Chrome Extension using Vue.js
+줄임말 변환기 - Browser Extension using Vue.js
 
 [![Youtube](https://img.youtube.com/vi/d-UKYFShhHI/0.jpg)](https://www.youtube.com/watch?v=d-UKYFShhHI)
 
