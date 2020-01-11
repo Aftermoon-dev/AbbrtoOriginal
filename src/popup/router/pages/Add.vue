@@ -73,7 +73,6 @@ export default {
             var isAlreadyRegistered = false;
 
             for(var i in wordArray) {
-                console.log(wordArray[i]);
                 if(wordArray[i]['abbr'] == _this.abbrWord || wordArray[i]['origin'] == _this.abbrWord || 
                     wordArray[i]['abbr'] == _this.originWord) {
                     isAlreadyRegistered = true;
@@ -81,14 +80,24 @@ export default {
                 }
             }
             if(!isAlreadyRegistered) {
-                _this.$message({
-                    showClose: true,
-                    message: '등록되었습니다!',
-                    type: 'success'
-                });
-                wordArray.push({'abbr': _this.abbrWord, 'origin': _this.originWord});
-                chrome.storage.local.set({'WordList': JSON.stringify(wordArray)}, function() {});
-                _this.clearText();
+                var tagReg = /(<([^>]+)>)/ig;
+                if(!tagReg.test(_this.originWord)) {
+                    _this.$message({
+                        showClose: true,
+                        message: '등록되었습니다!',
+                        type: 'success'
+                    });
+                    wordArray.push({'abbr': _this.abbrWord, 'origin': _this.originWord});
+                    chrome.storage.local.set({'WordList': JSON.stringify(wordArray)}, function() {});
+                    _this.clearText();
+                }
+                else {
+                    _this.$message({
+                        showClose: true,
+                        message: 'HTML 등의 태그 형식은 등록할 수 없습니다!',
+                        type: 'warning'
+                    });
+                }
             }
             else {
                 _this.$message({
