@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "줄임말 변환기",
   "description": "줄임말과 대치할 단어를 입력해두면, 글을 쓸 때 자동으로 변환해줍니다!",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "icons": {
     "48": "icons/icon_48.png",
     "128": "icons/icon_128.png"
@@ -26,8 +26,6 @@
   ],
   "permissions": [
       "storage",
-      "activeTab",
-      "tabs",
-      "<all_urls>"
+      "activeTab"
   ]
 }
