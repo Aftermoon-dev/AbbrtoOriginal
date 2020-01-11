@@ -7,6 +7,7 @@
             <template slot="title"><i class="el-icon-menu"></i>{{ menu }}</template>
             <el-menu-item-group>
               <el-menu-item index="List"><i class="el-icon-s-order"></i>{{ list }}</el-menu-item>
+              <el-menu-item index="Text"><i class="el-icon-edit"></i>{{ write }}</el-menu-item>
               <el-menu-item index="Setting"><i class="el-icon-set-up"></i>{{ setting }}</el-menu-item>
               <br />
             </el-menu-item-group>
@@ -34,7 +35,8 @@ export default {
       title: "줄임말 변환기",
       menu: "메뉴",
       list: "목록",
-      setting: '설정',
+      write: "쓰기",
+      setting: '설정'
     }
   },
   methods: {
