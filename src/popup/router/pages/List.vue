@@ -46,7 +46,14 @@ export default {
         chrome.storage.local.set({'WordList': firstList}, function() {});
         chrome.storage.local.set({'enable': true}, function() {});
         chrome.storage.local.set({'firstInit': false}, function() {});
-        chrome.tabs.create({url: "https://github.com/Aftermoon-dev/AbbrtoOriginal/wiki/Help-(%EB%8F%84%EC%9B%80%EB%A7%90)", active: true});
+        
+        _this.$confirm('줄임말 변환기를 설치해주셔서 감사합니다! 도움말 페이지를 여시겠습니까?', '알림', {
+          confirmButtonText: '예',
+          cancelButtonText: '아니오',
+          type: 'primary'
+        }).then(() => {
+          chrome.tabs.create({url: "https://github.com/Aftermoon-dev/AbbrtoOriginal/wiki/Help-(%EB%8F%84%EC%9B%80%EB%A7%90)", active: true});
+        }).catch(() => {});
       }
       _this.writeList();
     });
